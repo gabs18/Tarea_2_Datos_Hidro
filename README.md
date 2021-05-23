@@ -47,7 +47,7 @@ En esta etapa, se convierte todo dato faltante en un `na` para poder tener una s
 <br> 
 <br> 
 
-## 3. Graficacación del caudal de los ríos Estrella y Banano
+## 3. Graficar el caudal de los ríos Estrella y Banano
 Para poder graficar el historial diario del caudal se llama a la función `plot()`. Se logra un gráfico de la variabilidad de ambos caudales.  
 En términos prácticos, se configura el título con `main`, las etiquetas de los ejes con `xlab` y `ylab`, el tipo de gráfico `l` (lineal), y por último los colores para cada línea con `col`. 
 
@@ -73,7 +73,7 @@ El producto final de este gráfico es el siguiente:
 <br>
 <br> 
 
-## 4. Promedio de los caudales diarios por 10 años
+## 4. Calcular los valroes de los caudales diarios por 10 años
 Primero, se visualizan cálculos estadísticos de los caudales con la función `summary()`
           
     summary(inp[,2:3])
@@ -108,7 +108,7 @@ Después, se grafican los historiogramas que muestran esos cálculos:
 <br>
 <br> 
 
-## 5. Cambio de nombres de las columnas
+## 5. Cambiar los nombres de las columnas
 Se definen las columnas [,1], [,2] [,3] con los nombres "fecha", "Estrella" y "Banano":
 
     names(inp) <- c("fecha", "Estrella", "Banano")
@@ -171,18 +171,20 @@ Primero, se debe calcular el acumulado mensual de los caudales con `tapply()`:
         MMQ_Estrella <- tapply(inp[,2], format(Tempdate, format = "%m"), FUN = sum)
         MMQ_Banano <- tapply(inp[,3], format(Tempdate, format = "%m"), FUN = sum)
 
- <br> 
+<br> 
+
 En un segundo momento, se hace un análisis de correlación con la función `cor()` para las columnas 2 y 3, es decir, del río Estrella y Banano respectivamente. El gráfico se pule agregándole color y título.
 
         corinp <- cor(inp[,2:3], method = "spearman")
         plot(Estrella, Banano,
-          col = "darkblue",
-          main = "Análisis de correlación con el método Spearman")
+            col = "darkblue",
+            main = "Análisis de correlación con el método Spearman")
           
- Se obtiene este gráfico:
+ Se obtiene este gráfico:  
  ![Análisis de correlación](correlacion_banano_estrella.png)
 
 <br>
+
 Seguidamente, se crea un nuevo objeto `inp.lm` el cual representa la correlación entre el caudal del río Estrella y el del río Banano. Aquí, el valor dependiente es el caudal del río Banano. Asimismo, se llama la función `summary()` para desplegar los cálculos realizados:
 
        inp.lm <- lm(inp[,2] ~ inp[,3], data = inp)
@@ -209,7 +211,8 @@ Seguidamente, se crea un nuevo objeto `inp.lm` el cual representa la correlació
        Residual standard error: 7.025 on 3843 degrees of freedom
        Multiple R-squared:  0.1623,	Adjusted R-squared:  0.162 
        F-statistic: 744.4 on 1 and 3843 DF,  p-value: < 2.2e-16
- <br>     
+
+<br>     
 
 Finalmente, se grafican los resultados de los diagnósticos de correlación del método estadístico Spearman de la etapa anterior:
  
@@ -221,9 +224,12 @@ Finalmente, se grafican los resultados de los diagnósticos de correlación del 
 De este modo se obtienen 4 gráficos:
 ![Residuals vs fitted](residuals_vs_fitted.png)  
  <br> 
+ <br>
 ![Scale location](scale_location.png)  
  <br> 
+ <br>
 ![Normal qq](normal_qq.png)  
  <br> 
+ <br>
 ![Residuals leverage](residuals_leverage.png)  
 

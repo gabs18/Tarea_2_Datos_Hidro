@@ -135,7 +135,7 @@ Se crean los objetos `MAQ_Estrella` y `MAQ_Banano` con el objetivo de calcular e
 <br> 
 <br> 
 
-## 8. Graficar valores anuales
+## 8. Graficar los valores anuales
 En esta etapa se obtiene un gráfico comparativo de los valores anuales calculados en la etapa anterior. Por lo cual, se tiene que graficar con `plot()` los objetos `MAQ_Banano` y `MAQ_Estrella`. Una de las dificultades de este gráfico es que los valores para el río Banano son más altos que los del río Estrella. Por lo tanto, se emplea `ylim` para ajustar el límite en el eje y, de este modo ambas líneas se visualizan adecuadamente en el gráfico. Por otro lado, se agrega una leyenda con `legend()` y se repite el procedimiento de graficación con `lines()` para el río Estrella. El código fuente es el siguiente:
 
     windows(width = 20, height = 15)
@@ -165,7 +165,7 @@ Se obtiene el gráfico siguiente:
 <br> 
 <br>
 
-## 9. Graficar variabilidad anual
+## 9. Graficar la variabilidad anual
 Primero, se debe calcular el acumulado mensual de los caudales con `tapply()`:
 
         MMQ_Estrella <- tapply(inp[,2], format(Tempdate, format = "%m"), FUN = sum)

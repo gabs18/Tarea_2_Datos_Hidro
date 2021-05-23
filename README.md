@@ -1,40 +1,53 @@
-#Exploración de datos geográficos
-##Tarea 2 del curso de Procesamiento de datos geográficos (GF0604)
-###Fecha de entrega: lunes 24 de mayo 2021 hasta las 7:00 a.m.  
-
-##Estudiante: Gabriela Becerra Sandoval (C01067)
-
-
-#####En esta práctica se pretende analizar datos hidrológicos para determinar las relaciones correspondientes al flujo de agua en los ríos Banano y Estrella. En efecto, se estudia el caudal de cada uno de ellos según sus valores anuales, mensuales y la correlación entre cada uno de ellos.
-#####El archivo con el que se trabaja muestra las fechas correspondientes a cuanta agua transportó el río Estrella, de la cuenca Pandora, y el río Banano. Entre más alto sea el valor, más mm diarios de agua fluyeron en ese río.
+# Exploración de datos geográficos  
+## Tarea 2 del curso de Procesamiento de datos geográficos (GF0604)  
+_Fecha de entrega: lunes 24 de mayo 2021 hasta las 7:00 a.m._    
+Estudiante: Gabriela Becerra Sandoval (C01067)  
 
 
-#1. Agregar y visualizar los datos del archivo FDC.csv
-##Primero se crea el objeto de asociación inp con los datos del la hoja de cálculo. Dentro de los parámetros, agregamos la función "na.strings" que nos permite convertir los datos faltantes en un espacio vacío. De este modo, se obtiene una serie de datos continua.
-##Luego, con la función "head(inp)" se visualiza el encabezado y las primeras líneas del archivos con los datos de los ríos Banano y Estrella.
-##Finalmente, para tener una vista general de cuántas filas y columnas tiene el csv, se llama la función dim(inp).
-inp <- read.csv("FDC.csv", na.strings = "")
-head(inp)
-dim(inp)
+_En esta práctica se pretende analizar datos hidrológicos para determinar las relaciones correspondientes al flujo de agua en los ríos Banano y Estrella. En efecto, se estudia el caudal de cada uno de ellos según sus valores anuales, mensuales y la correlación entre cada uno de ellos.
+El archivo con el que se trabaja muestra las fechas correspondientes a cuanta agua transportó el río Estrella, de la cuenca Pandora, y el río Banano. Entre más alto sea el valor, más mm diarios de agua fluyeron en ese río._
 
-#Consultar si los datos son discontinuos
-inp[!complete.cases(inp),]
+  
+  
+## 1. Agregar y visualizar los datos del archivo FDC.csv
+Primero se crea el objeto de asociación inp con los datos del la hoja de cálculo. Dentro de los parámetros, agregamos la función "na.strings" que nos permite convertir los datos faltantes en un espacio vacío. De este modo, se obtiene una serie de datos continua.  
+Luego, con la función "head(inp)" se visualiza el encabezado y las primeras líneas del archivos con los datos de los ríos Banano y Estrella.  
+Finalmente, para tener una vista general de cuántas filas y columnas tiene el csv, se llama la función dim(inp).    
 
-#Caudales de los ríos Estrella y Banano
-plot(inp[,2], 
-     main = "Variabilidad diaria del caudal de los ríos Estrella y Banano",
-     xlab = "Días desde 1973 hasta 1983",
-     ylab = "Caudal (mm/día)",
-     type = "l", 
-     col= "#CC3366")
-legend(x = "topright",
-       inset = c(0, 0),
-       legend = c("Río Banano", "Río Estrella"), 
-       lty = c(1, 1),
-       col = c("#CC3366", "#009999"),
-       lwd = 2,
-       xpd = TRUE) 
-lines(inp[,3], col = "#009999")
+`inp <- read.csv("FDC.csv", na.strings = "")    
+head(inp)    
+dim(inp)`  
+
+
+
+## 2. Consultar si los datos son discontinuos
+En esta etapa, se convierte todo dato faltante en un _na_ para poder tener una serie de datos continuos.  
+`inp[!complete.cases(inp),]`  
+
+
+
+## 3. Graficacación del caudal de los ríos Estrella y Banano
+Para poder graficar el historial diario del caudal se llama a la función _plot()_. Se logra un gráfico de la variabilidad de ambos caudales.  
+En términos prácticos, se configura el título con _main_, las etiquetas de los ejes con _xlab_ y _ylab_, el tipo de gráfico _l_ (lineal), y por último los colores para cada línea con _col_.()
+
+     plot(inp[,2], 
+          main = "Variabilidad diaria del caudal de los ríos Estrella y Banano", 
+          xlab = "Días desde 1973 hasta 1983",  
+          ylab = "Caudal (mm/día)",  
+          type = "l",   
+          col= "#CC3366")  
+     legend(x = "topright", 
+          inset = c(0, 0),  
+          legend = c("Río Banano", "Río Estrella"),   
+          lty = c(1, 1),  
+          col = c("#CC3366", "#009999"),
+          lwd = 2,  
+          xpd = TRUE)
+     lines(inp[,3], col = "#009999")
+
+
+El producto final de este gráfico es el siguiente:
+![Caudal de los ríos Estrella y Banano](variabilidad_caudal_plot_1.png)
 
 
 #Promedio de los caudales diarios por 10 años

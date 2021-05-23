@@ -73,7 +73,7 @@ El producto final de este gráfico es el siguiente:
 <br>
 <br> 
 
-## 4. Calcular los valroes de los caudales diarios por 10 años
+## 4. Calcular los valores de los caudales diarios por 10 años
 Primero, se visualizan cálculos estadísticos de los caudales con la función `summary()`
           
     summary(inp[,2:3])
